@@ -28,31 +28,38 @@ angular_pos = [-71*deg2rad, -79*deg2rad, -93*deg2rad, -93*deg2rad, 89*deg2rad, -
 
 # Commandes robot
 '''
-Les différentes commandes sont disponibles dans les fichiers python-urx-0.11.0/urx/robot.py 
-                                                          et python-urx-0.11.0/urx/urrobot.py
+Les différentes commandes sont disponibles dans les fichiers python-urx/urx/robot.py 
+                                                          et python-urx/urx/urrobot.py
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+ATTENTION les coordonnées  données dans cet exemple
+ne sont pas nécessairement compatibles avec la disposition de votre robot.
+Avant d'enlever de lancer le programme
+assurez vous que cela est possible en sécurité pour les humains et le matériel
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Décommenter les lignes suivantes pour lancer le programme d'exemple
 '''
-robot.movel([0.09, -0.45, 0.25, 0.82, -3, 0.1], acc=acc, vel=vel)        # Bouge le robot aux coordonnées cartésiennes
+# robot.movel([0.09, -0.45, 0.25, 0.82, -3, 0.1], acc=acc, vel=vel)        # Bouge le robot aux coordonnées cartésiennes
 
-robot.movej(angular_pos, acc=acc, vel=vel)	                    # Bouge le robot en articulaire (radian)
-print(robot.get_pose())                                          # Renvoie le (x, y, z) du TCP
-robot.up()
-robot.down()
-robot.translate([0.1, 0.1, 0.1])
+# robot.movej(angular_pos, acc=acc, vel=vel)	                    # Bouge le robot en articulaire (radian)
+# print(robot.get_pose())                                          # Renvoie le (x, y, z) du TCP
+# robot.up()
+# robot.down()
+# robot.translate([0.1, 0.1, 0.1])
 
 # Commandes pince
 '''
-Les différentes commandes sont disponibles dans le fichier python-urx-0.11.0/urx/robotiq_two_fingers_gripper.py
+Les différentes commandes sont disponibles dans le fichier python-urx/urx/robotiq_two_fingers_gripper.py
 dans la classe Robotiq_Two_Finger_Gripper                                             
 '''
-gripper.open_gripper()                                  # Ferme entièrement le gripper
-gripper.close_gripper()                                 # Ouvre entièrement le gripper
-gripper.gripper_action(150)                             # Ouvre le gripper à une certaine taille (0:ouvert, 255: fermé)
-print(gripper.send_opening(TCP_Mon_Ordi, TCP_PORT_GRIPPER))  # Retourne l'ouverture de la pince
+# gripper.open_gripper()                                  # Ferme entièrement le gripper
+# gripper.close_gripper()                                 # Ouvre entièrement le gripper
+# gripper.gripper_action(150)                             # Ouvre le gripper à une certaine taille (0:ouvert, 255: fermé)
+# print(gripper.send_opening(TCP_Mon_Ordi, TCP_PORT_GRIPPER))  # Retourne l'ouverture de la pince
 
 
-for i in range(5):
-    robot.movel([0.09, -0.45, 0.25, 0.82, -3, 0.1], acc=acc, vel=vel)
-    robot.movel([0.01, -0.45, 0.25, 0.82, -3, 0.1], acc=acc, vel=vel)
+# for i in range(5):
+#     robot.movel([0.09, -0.45, 0.25, 0.82, -3, 0.1], acc=acc, vel=vel)
+#     robot.movel([0.01, -0.45, 0.25, 0.82, -3, 0.1], acc=acc, vel=vel)
 
 # Fermeture propre de la connection
 robot.close()
