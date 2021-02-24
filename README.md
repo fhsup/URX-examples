@@ -5,6 +5,8 @@ An ATI Ethernet Axia F/T Sensor is added to our UR robot, an additional library 
 ## Install URX
 * Open a terminal in the same folder as the README.md type in ``` pip install python-urx ```
 * Open a terminal in the same folder as the README.md type in ``` pip install NetFT-master```
+* In order to use the library you must define the static IP addresses of the UR robot and of your personal computer (see TCP_Robot and TCP\_MON\_ORDI variables in urx-examples.py). In order to avoid network latency you should better connect your computer directly to the UR robot. You also have to define in the UR computer parameter menu the static IP address of your computer (same as TCP\_MON\_ORDI). 
+
 
 ## Modifications
 To discover, add or modify some skills, go into  
@@ -13,6 +15,7 @@ To discover, add or modify some skills, go into
   * NetFT-master/NetFT/__init__.py
 
 After any changes, go into the terminal of the corresponding folder and key in ``` pip  install .  ```
+
 
 ## Examples
 Examples are in urx-examples.py.
