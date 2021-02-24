@@ -15,23 +15,23 @@ TCP_PORT = 30002                    # Ne pas changer
 robot = urx.Robot(TCP_Robot)
 robot.set_tcp((0, 0, 0.3, 0, 0, -0.43)) # Position du Tool Center Point par rapport au bout du robot (x,y,z,Rx,Ry,Rz)
                                     # (en mm et radians)
-robot.set_payload(1, (0, 0, 0.1))       # Poids de l'outil et position de son centre de gravité (en kg et mm)
+robot.set_payload(2.152, (0, 0, 0.1))       # Poids de l'outil et position de son centre de gravité (en kg et mm)
 
 # Connection à la pince
 gripper = Robotiq_Two_Finger_Gripper(robot)
 
 # Caractéristique de mouvement
-acc = 0.4                           # Accélération maximale des joints
-vel = 0.4                           # Vitesse maximale des joints
+acc = 0.1                        # Accélération maximale des joints
+vel = 0.2                           # Vitesse maximale des joints
 deg2rad = np.pi/180
-angular_pos = [-250*deg2rad, -55*deg2rad, 50*deg2rad, -90*deg2rad, 250*deg2rad, -50*deg2rad]
+angular_pos = [-71*deg2rad, -79*deg2rad, -93*deg2rad, -93*deg2rad, 89*deg2rad, -12*deg2rad]
 
 # Commandes robot
 '''
 Les différentes commandes sont disponibles dans les fichiers python-urx-0.11.0/urx/robot.py 
                                                           et python-urx-0.11.0/urx/urrobot.py
 '''
-robot.movel([0.192, -0.616, 0.3, 3, 0, 0], acc=acc, vel=vel)        # Bouge le robot aux coordonnées cartésiennes
+robot.movel([0.09, -0.45, 0.25, 0.82, -3, 0.1], acc=acc, vel=vel)        # Bouge le robot aux coordonnées cartésiennes
 
 robot.movej(angular_pos, acc=acc, vel=vel)	                    # Bouge le robot en articulaire (radian)
 print(robot.get_pose())                                          # Renvoie le (x, y, z) du TCP
@@ -48,25 +48,11 @@ gripper.open_gripper()                                  # Ferme entièrement le 
 gripper.close_gripper()                                 # Ouvre entièrement le gripper
 gripper.gripper_action(150)                             # Ouvre le gripper à une certaine taille (0:ouvert, 255: fermé)
 print(gripper.send_opening(TCP_Mon_Ordi, TCP_PORT_GRIPPER))  # Retourne l'ouverture de la pince
-robot.close()                                           # Fermeture de la connection
 
 
-# Commandes capteur de force ouvrir une connection avec le capteur de force
-robot = urx.Robot(TCP_Robot, useForce=True)
-robot.set_tcp((0, 0, 0.3, 0, 0, -0.43)) # Position du Tool Center Point par rapport au bout du robot (x,y,z,Rx,Ry,Rz)
-                                    # (en mm et radians)
-robot.set_payload(1, (0, 0, 0.1))
-print(robot.force_sensor.getZForce())
-robot.force_sensor.tare()           # Tare le capteur de force
-robot.force_sensor.getNormForce()   # Retourne la norme de la force en Newton
-print('Force en Z positif')
 for i in range(5):
-    robot.movel([0.192, -0.616, 0.3, 3, 0, 0], acc=acc, vel=vel, zforce=-1)
-    robot.movel([0.0, -0.616, 0.3, 3, 0, 0], acc=acc, vel=vel, zforce=-1)
+    robot.movel([0.09, -0.45, 0.25, 0.82, -3, 0.1], acc=acc, vel=vel)
+    robot.movel([0.01, -0.45, 0.25, 0.82, -3, 0.1], acc=acc, vel=vel)
 
-print('Force Normale')
-for i in range(5):
-    robot.movel([0.192, -0.616, 0.3, 3, 0, 0], acc=acc, vel=vel, force=5)
-    robot.movel([0.0, -0.616, 0.3, 3, 0, 0], acc=acc, vel=vel, force=5)
 # Fermeture propre de la connection
 robot.close()
