@@ -9,7 +9,7 @@ TCP_Mon_Ordi = "192.168.1.100"      # Adresse IP de mon ordi (Il faut paramétre
                                     # et écrire une adresse IP dans le même sous réseau
                                     # que le robot 192.168.1.XX)
 TCP_PORT_GRIPPER = 40001            # Ne pas changer
-TCP_PORT = 30002                    # Ne pas changer
+TCP_PORT = 50002                    # Ne pas changer
 
 # Connection au robot
 robot = urx.Robot(TCP_Robot)
@@ -22,7 +22,7 @@ gripper = Robotiq_Two_Finger_Gripper(robot)
 
 # Caractéristique de mouvement
 acc = 0.1                        # Accélération maximale des joints
-vel = 0.2                           # Vitesse maximale des joints
+vel = 0.05                           # Vitesse maximale des joints
 deg2rad = np.pi/180
 angular_pos = [-71*deg2rad, -79*deg2rad, -93*deg2rad, -93*deg2rad, 89*deg2rad, -12*deg2rad]
 
@@ -38,7 +38,7 @@ assurez vous que cela est possible en sécurité pour les humains et le matérie
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 Décommenter les lignes suivantes pour lancer le programme d'exemple
 '''
-# robot.movel([0.09, -0.45, 0.25, 0.82, -3, 0.1], acc=acc, vel=vel)        # Bouge le robot aux coordonnées cartésiennes
+robot.movel([0.09, -0.45, 0.25, 0.82, -3, 0.1], acc=acc, vel=vel)        # Bouge le robot aux coordonnées cartésiennes
 
 # robot.movej(angular_pos, acc=acc, vel=vel)	                    # Bouge le robot en articulaire (radian)
 # print(robot.get_pose())                                          # Renvoie le (x, y, z) du TCP
@@ -62,4 +62,6 @@ dans la classe Robotiq_Two_Finger_Gripper
 #     robot.movel([0.01, -0.45, 0.25, 0.82, -3, 0.1], acc=acc, vel=vel)
 
 # Fermeture propre de la connection
+# gripper.open_gripper()
+
 robot.close()

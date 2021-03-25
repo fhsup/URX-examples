@@ -84,8 +84,9 @@ class RobotiqScript(URScript):
     def _import_rq_script(self):
         dir_path = os.path.dirname(os.path.realpath(__file__))
         rq_script = os.path.join(dir_path, 'rq_script.script')
-        path = "/home/laurent/Documents/Installer/python-urx-0.11.0/DCU-1.0.10_20171127/DCU-1.0.10/robotiq_2f_gripper_programs_CB3/rq_script.script"
+        path = "/home/fhelenon/Documents/documents/laurent/URX-examples/python-urx/DCU-1.0.10_20171127/DCU-1.0.10/robotiq_2f_gripper_programs_CB3/rq_script.script"
         with open(path, 'rb') as f:
+            print("ok")
             rq_script = f.read()
             self.add_header_to_program(rq_script)
 
@@ -175,6 +176,8 @@ class Robotiq_Two_Finger_Gripper(object):
         self.socket_port = socket_port
         self.socket_name = socket_name
         self.logger = logging.getLogger(u"robotiq")
+        self.is_activate = False 
+
 
     def _get_new_urscript(self):
         """
@@ -200,9 +203,12 @@ class Robotiq_Two_Finger_Gripper(object):
         urscript._set_gripper_force(self.force)
 
         # Initialize the gripper
-        urscript._set_robot_activate()
-        urscript._set_gripper_activate()
-
+        if not self.is_activate:
+            urscript._set_robot_activate()
+            urscript._set_gripper_activate()
+            self.is_activate = True
+        else:
+            pass 
         # Wait on activation to avoid USB conflicts
         urscript._sleep(0.1)
 

@@ -48,7 +48,7 @@ class URRobot(object):
         # It seems URScript is  limited in the character length of floats it accepts
         self.max_float_length = 6  # FIXME: check max length!!!
         print('check')
-        print(useForce)
+        print("use force :{}".format(useForce))
         if useForce:
             print('use force sensor')
             try:
